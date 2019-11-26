@@ -22,22 +22,28 @@ def stable_outcome(G,v):
 def create_exchange_graph(driver_locations, rider_locations, destinations, rider_values):
     num_riders = len(rider_locations)
     num_drivers = len(driver_locations)
+
     graph = G.Graph()
     graph = G.create_graph(num_riders + num_drivers + 2, 0) # 1 source, 1 sink
-    source = graph.get_node(0)
-    sink = graph.get_node((num_riders+num_drivers)+1)
-    drivers = [graph.get_node(x) for x in range(1, num_drivers+1)]
-    riders = [graph.get_node(x) for x in range(num_drivers + 1, num_drivers + num_riders + 2)]
+    drivers = [graph.get_node(x) for x in range(num_drivers)]
+    riders = [graph.get_node(x) for x in range(num_drivers, num_drivers + num_riders)]
+
     for d_dx, driver in enumerate(drivers):
         for r_dx, rider in enumerate(riders):
             cost = dist(driver_locations[d_dx], rider_locations[r_dx]) + dist(rider_locations[r_dx], destinations[r_dx])
+            # print(driver_locations[d_dx], rider_locations[r_dx], destinations[r_dx])
             edge_weight = rider_values[r_dx] - cost
+            # print(cost, rider_values[r_dx], edge_weight)
             graph.add_directed_edge(driver, rider, edge_weight)
     print("Please see Graph below: ")
     graph.print_graph()
 
 
 
-
+driver_locations = [(1,2), (2,3)]
+rider_locations = [(0,0), (1,1), (2,3)]
+destinations = [(1,1), (2,1), (4, 5)]
+rider_values = [3, 4, 2]
+create_exchange_graph(driver_locations, rider_locations, destinations, rider_values)
 
 
