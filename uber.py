@@ -7,7 +7,7 @@ import numpy as np
 
 # compute the manhattan distance between two points a and b (represented as pairs)
 def dist(a,b):
-    return -1
+    return abs(b[0]-a[0]) + abs(b[1]-a[1])
 
 # Give a representation for riders/ drivers somewhere which can be included in your graph used in stable_outcome
 
@@ -17,8 +17,6 @@ def stable_outcome(G,v):
     M = None
     a = None
     return (M,a)
-
-
 
 #Example of how to create an n*n graph
 def create_bipartite_graph(riders:int, drivers:int, p:float):
