@@ -58,11 +58,14 @@ class Graph:
             node_to.num_infected_neighbors += 1
 
     def print_graph(self):
+        print("--------------- Printing Graph ---------------")
         for node in self.nodes:
             print("Node:", node)
             print("Edges:")
             for edge in self.nodes[node].edges:
                 print("\t", edge.node_to.id, "\t", "weight:", edge.weight)
+        print("-------------- End Printing Graph -------------")
+
 
 
 class BuyerNode(Node):

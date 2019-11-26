@@ -134,9 +134,6 @@ def run_tests():
         write_results_to_file_p8("p8.txt", valuations, n, p, M)
 
 
-run_tests()
-
-
 #Question 9:
 def q_9_c():
     num_players, num_items = 20, 20
@@ -152,6 +149,4 @@ def q_9_c():
     write_results_to_file_p7("p9.txt", player_valuations, num_players, p, M)
     p, M = vcg(num_players, num_items, player_valuations)
     write_results_to_file_p8("p9.txt", player_valuations, num_players, p, M)
-
-q_9_c()
 
