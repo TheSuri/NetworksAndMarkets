@@ -107,13 +107,14 @@ class MarketGraph(Graph):
         self.add_node(self.source)
         self.add_node(self.sink)
 
-    def create_market_graph(self, n, valuations, prices):
+    def create_market_graph(self, num_buyers, num_sellers, valuations, prices):
         self.prices = prices
-        for i in range(n):
+        for i in range(num_buyers):
             buyer_node = BuyerNode('b' + str(i), valuations[i])
             self.add_node(buyer_node)
             self.add_directed_edge(self.source, buyer_node, 1)
             self.buyer_node_set.add(buyer_node)
+        for i in range(num_sellers):
             seller_node = SellerNode('s' + str(i), prices[i])
             self.add_node(seller_node)
             self.seller_node_set.add(seller_node)
@@ -154,7 +155,7 @@ def get_matching(original_graph, residual_graph):
     path_dict = find_path(residual_graph, residual_graph.get_node(float('inf')),
                           residual_graph.get_node(float('-inf')))
     p = [None] * len(original_graph.buyer_node_set)
-    M = [None] * len(original_graph.seller_node_set)
+    M = [None] * len(original_graph.buyer_node_set)
     for buyer_node in original_graph.buyer_node_set:
         house_assigned = path_dict[residual_graph.get_node(buyer_node.id)]
         M[int(buyer_node.id[1:])] = int(house_assigned.id[1:])
