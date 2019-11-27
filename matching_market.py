@@ -42,9 +42,6 @@ def market_eq(values, prices=None):
     # a residual graph instead of a constricted set
     while type(constricted_set_sellers) is set:
         market_graph.update_prices(constricted_set_sellers)
-        #print("Constricted sellers from current iteration:")
-        # for node in constricted_set_sellers:
-            # print("node.id:", node.id, "curr price:", market_graph.get_node(node.id).price)
         market_graph.set_utilities()
         market_graph.create_best_valuation_edges()
         constricted_set_sellers = matching_or_cset(market_graph)
@@ -69,7 +66,6 @@ def vcg(n, m, values):
         p_new, M_new = market_eq(values_without_player_i, prices)
         social_value_new =  sum([values_without_player_i[j][M_new[j]] for j in range(len(values_without_player_i))])
         # Dont include the valuation of the original in social_value_original hence subtracting values[i][M_original[i]]
-        print(social_value_new, social_value_original, values[i][M_original[i]])
         p[i] = social_value_new - (social_value_original - values[i][M_original[i]])
     return p, M_original
 

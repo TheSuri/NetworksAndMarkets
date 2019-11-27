@@ -109,8 +109,10 @@ class MarketGraph(Graph):
         self.prices = list()
         self.add_node(self.source)
         self.add_node(self.sink)
+        self.valuations = list
 
     def create_market_graph(self, num_buyers, num_sellers, valuations, prices):
+        self.valuations = valuations
         self.prices = prices
         for i in range(num_buyers):
             buyer_node = BuyerNode('b' + str(i), valuations[i])
